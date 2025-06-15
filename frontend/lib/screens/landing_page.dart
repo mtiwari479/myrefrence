@@ -7,7 +7,7 @@ class LandingPage extends StatelessWidget {
     Navigator.pushNamed(
       context,
       '/loginChoice',
-      arguments: category,
+      arguments: {'category': category}, // ✅ fixed here
     );
   }
 

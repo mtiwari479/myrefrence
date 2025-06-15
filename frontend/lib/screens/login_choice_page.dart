@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LoginChoicePage extends StatelessWidget {
-  final String category;
+  const LoginChoicePage({super.key, required String category});
 
-  const LoginChoicePage({super.key, required this.category});
-
-  void _navigateToLogin(BuildContext context, String role) {
+  void _navigateToLogin(BuildContext context, String category, String role) {
     Navigator.pushNamed(
       context,
       '/login',
@@ -18,6 +16,9 @@ class LoginChoicePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, String>?;
+    final category = args?['category'] ?? 'Unknown';
+
     List<String> roles = [];
 
     if (category == 'Institution') {
@@ -36,7 +37,7 @@ class LoginChoicePage extends StatelessWidget {
                 (role) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: ElevatedButton(
-                    onPressed: () => _navigateToLogin(context, role),
+                    onPressed: () => _navigateToLogin(context, category, role),
                     child: Text(role),
                   ),
                 ),
